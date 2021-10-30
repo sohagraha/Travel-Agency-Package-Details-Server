@@ -67,6 +67,7 @@ async function run() {
             res.send('inside post');
         })
 
+
         // DELETE my order API
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
@@ -76,6 +77,34 @@ async function run() {
             res.json(result);
 
         })
+
+        app.get('/orders/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const service = await ordersCollection.findOne(query);
+            res.json(service);
+        })
+
+
+        // //Update Api
+        // app.get("/orders/:id", async (req, res) => {
+        //     const id = req.params.id;
+        //     const query = { _id: ObjectId(id) };
+        //     const user = await ordersCollection.findOne(query);
+        //     console.log("Load User with id: ", id);
+        //     res.send(user)
+        // })
+
+        // //Update Api
+        // app.put('/orders/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const { updated } = req.body;
+        //     await ordersCollection.findOneAndUpdate({ _id: id }, { status: updated })
+        //     //console.log("Updating User", req);
+        //     res.send({ msg: "success" })
+        // }
+        // )
+
 
     }
     finally {
