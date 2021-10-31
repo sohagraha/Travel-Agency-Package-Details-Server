@@ -85,25 +85,19 @@ async function run() {
             res.json(service);
         })
 
-
-        // //Update Api
-        // app.get("/orders/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const user = await ordersCollection.findOne(query);
-        //     console.log("Load User with id: ", id);
-        //     res.send(user)
-        // })
-
-        // //Update Api
-        // app.put('/orders/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const { updated } = req.body;
-        //     await ordersCollection.findOneAndUpdate({ _id: id }, { status: updated })
-        //     //console.log("Updating User", req);
-        //     res.send({ msg: "success" })
-        // }
-        // )
+        //Update Api
+        app.put('/orders/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = {
+                $set: {
+                    status: "processing"
+                }
+            }
+            const result = await ordersCollection.updateOne(filter, updateDoc)
+            res.json(result)
+        }
+        )
 
 
     }
