@@ -56,15 +56,11 @@ async function run() {
             const service = req.body;
             const result = await servicesCollection.insertOne(service);
             res.json(result)
-            // console.log("hitting post");
-            res.send('inside post');
         })
         app.post('/orders', async (req, res) => {
             const service = req.body;
             const result = await ordersCollection.insertOne(service);
             res.json(result)
-            console.log("hitting post");
-            res.send('inside post');
         })
 
 
